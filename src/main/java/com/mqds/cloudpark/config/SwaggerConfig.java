@@ -19,6 +19,8 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("Parking Rest API")
                 .description("Gerenciamento de vagas de estacionamento")
+                //.license("Apache License Version 2.0")
+                //.licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
                 .version("1.0.0")
                 .build();
     }
