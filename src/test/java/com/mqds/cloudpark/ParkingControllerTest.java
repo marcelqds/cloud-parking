@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ParkingControllerTest {
+public class ParkingControllerTest extends AbstractContainerBase {
 
     @LocalServerPort
     private int randomPort;
@@ -23,12 +23,12 @@ public class ParkingControllerTest {
     }
 
     @Test
-    void whenFindAllThenCheckResult(){
+    void whenFindAllThenCheckResultEqualNull(){
         RestAssured.given()
                 .when().get("/parking")
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body("license[0]", Matchers.equalTo("DKS-1212"));
+                .body("license[0]", Matchers.equalTo(null));
                 //.extract().response().body().prettyPrint();
     }
 
@@ -50,6 +50,15 @@ public class ParkingControllerTest {
                 .statusCode(HttpStatus.CREATED.value())
                 .body("license", Matchers.equalTo("DTZ-3704"))
                 .body("id",Matchers.notNullValue());
+    }
+
+    @Test
+    void whenFindAllThenCheckOneResult(){
+        RestAssured
+            .when().get("/parking")
+            .then()
+            .statusCode(HttpStatus.OK.value())
+            .body("license[0]",Matchers.equalTo("DTZ-3704"));
     }
 
 }
