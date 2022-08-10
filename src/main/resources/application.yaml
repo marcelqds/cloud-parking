@@ -21,3 +21,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate_format_sql: true
+#  security:
+#    user:
+#      name: user
+#      password: 12345
